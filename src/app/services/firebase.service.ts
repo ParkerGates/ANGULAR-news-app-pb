@@ -5,6 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import { NewsApiService } from './news-api.service';
+import { AllLikesItem } from 'src/app/interfaces/all-likes-item';
+import { ArticleContent } from 'src/app/interfaces/article-content';
 
 @Injectable({
   providedIn: 'root'
@@ -105,7 +107,7 @@ export class FirebaseService {
 
 
 
-  addLike(article) {
+  addLike(article: ArticleContent) {
     this.users = JSON.parse(localStorage.getItem("users"));
     this.user = this.users[this.id];
 
@@ -123,12 +125,13 @@ export class FirebaseService {
         return;
       }
     }
-    this.allLikes.push({count: 1, article: article});
+    let basic: AllLikesItem = {count: 1, article: article}
+    this.allLikes.push(basic);
     localStorage.setItem("allLikes", JSON.stringify(this.allLikes));
     return;
   }
 
-  removeLike(article) {
+  removeLike(article: ArticleContent) {
     this.users = JSON.parse(localStorage.getItem("users"));
     this.user = this.users[this.id]
 

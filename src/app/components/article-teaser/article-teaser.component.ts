@@ -2,6 +2,9 @@ import { Input, Component, OnInit } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { NewsApiService } from 'src/app/services/news-api.service';
 
+import { ArticleContent } from 'src/app/interfaces/article-content';
+import { AllLikesItem } from 'src/app/interfaces/all-likes-item';
+
 @Component({
   selector: 'app-article-teaser',
   templateUrl: './article-teaser.component.html',
@@ -12,7 +15,7 @@ export class ArticleTeaserComponent implements OnInit {
   @Input() userLikes?;
   @Input() allLikes?;
 
-  obj = {
+  obj: ArticleContent = {
     "source": {
         "id": "usa-today",
         "name": "USA Today"
@@ -46,7 +49,7 @@ export class ArticleTeaserComponent implements OnInit {
     }
   }
 
-  clickLike(event, data) {
+  clickLike(event, data: ArticleContent) {
     let heartClass = event.target.className;
 
     if (heartClass.includes("icon-white")) {
@@ -59,7 +62,7 @@ export class ArticleTeaserComponent implements OnInit {
     }
   }
 
-  isAlreadyLiked(data) {
+  isAlreadyLiked(data: ArticleContent) {
     for (let a = 0; a < this.userLikes.length; a++) {
       if (this.userLikes[a].title == data.title) {
         return "fas fa-heart heart-pink";

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { AllLikesItem } from 'src/app/interfaces/all-likes-item';
+import { ArticleContent } from 'src/app/interfaces/article-content';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsApiService {
   apiKey: string = "75e20b21ea8f499190960a2dfbc5f410";
-  categories = ['business','entertainment','general','health','science','sports','technology'];
+  categories: string[] = ['business','entertainment','general','health','science','sports','technology'];
   sideNavShouldOpen = null;
 
   constructor() { }
@@ -300,7 +302,7 @@ export class NewsApiService {
 
 
 
-    allLikes = [
+    allLikes: AllLikesItem[] = [
         { count: 1, article: {
             "source": {
                 "id": "cnn",
